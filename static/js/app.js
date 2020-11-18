@@ -8,6 +8,13 @@ function Top10OTU(sample, name) {
   // loop through records to obtain specific id's
   for (var i = 0; i < sampleValue.otu_ids.length; i++) {
 
+    // Json dict to append to dataJSON list
+    dictJSON = {
+      sampleValues: sampleValue.sample_values[i],
+      otuID: sampleValue.otu_ids[i],
+      otuLabel: sampleValue.otu_labels[i]
+    }
+    dataJSON.push(dictJSON)
   }
 }
   
