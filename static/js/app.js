@@ -147,3 +147,5 @@ function infoOTU(metadata, name) {
     row.text(`${key}:${value}`);
   })
 }
+
+// Run all functions and retrieve data upon opening app
