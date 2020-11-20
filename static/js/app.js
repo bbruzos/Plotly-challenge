@@ -104,7 +104,7 @@ function gaugeDisplay(metadata, name) {
       // Display title for gauge
       title: {
         text: "Belly Button Wash Frequency (Scrub Per Week)",
-        font: { size: 14, color: 'black',  }
+        font: { size: 12, color: 'black',  }
       },
       delta: { reference: 0, increasing: { color: "RebeccaPurple" } },
       gauge: {
