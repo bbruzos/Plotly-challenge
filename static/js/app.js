@@ -75,7 +75,7 @@ function displaybubbleChart (sample,name){
 }
 
 // func for Guage display
-function showGauge(metadata, name) {
+function gaugeDisplay(metadata, name) {
 
   //lookup the data by experiment name 
   var sampleMeta = metadata.filter(m => m.id === parseInt(name));
@@ -149,3 +149,37 @@ function infoOTU(metadata, name) {
 }
 
 // Run all functions and retrieve data upon opening app
+d3.json("data/samples.json").then((jsondata) => {
+  var selectDrop = d3.select("#selDataset");
+  selectDrop.selectAll('option')
+    .data(jsondata.names.map(item => item))
+    .enter().append('option')
+    .text(text => text)
+
+    // Retrieve labels, samples, and metadata from json file
+    var labels = jsondata.names;
+    var samples = jsondata.samples;
+    var metadata = jsondata.metadata;
+
+    // Display bar chart, data info, gauge chart, and bubble for first value
+    displaybarChart(sample, names[0])
+    infoOTU(metadata, names[0])
+    gaugeDisplay(metadata, names[0])
+    displaybubbleChart(sample, names[0])
+
+    selectDrop.on("change", dropdownList);
+    // Event handlet for dropdown list function
+    function dropdownList (){
+      d3.event.preventDefault();
+      var userInput = d3.select("select");
+      var userSample = userInput.property("value");
+
+      displaybarChart(sample, userSample)
+      intoOTU(metadata, userSample)
+      gaugeDisplay(metadata, userSample)
+      displaybubbleChart(sample,userSample)
+
+    }
+
+
+});
