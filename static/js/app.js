@@ -61,5 +61,16 @@ function displaybubbleChart (sample,name){
 
     }
   }];
+
+  // Layout of bubble chart
+  var bubbleLayout = {
+    autosize: true,
+    xaxis: { title: "OTU ID"},
+    title: "Bubble Chart",
+    config: {
+      'displayModeBar': true
+    }
+  };
+  Plotly.newPlot('bubble', displaybubbleChart, bubbleLayout);
 }
   
