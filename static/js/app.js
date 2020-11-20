@@ -24,5 +24,22 @@ function Top10OTU(sample, name) {
   return topTenData;
 }
 
+// Func to display bar chart
 
+function displaybarChart (sample, name) {
+  var dataDisplay = Top10OTU(sample,name);
+
+  var trace1 = [{
+    // X-value, Y-value, labels and text
+    type: "bar",
+    x: dataDisplay.map(item => item.sampleValues).reverse(),
+    y: dataDisplay.map(item => 'OTU' + item.outID).reverse(),
+    labels: dataDisplay.map(item => 'OTU' + item.outID).reverse(),
+    text: dataDisplay.map( item => item.otuLabel).reverse(),
+    orientation: "h"
+
+  }];
+
+  Plotly.newPlot("bar", trace1, {displayModeBar: false});
+}
   
