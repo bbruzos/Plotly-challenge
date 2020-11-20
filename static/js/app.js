@@ -73,4 +73,63 @@ function displaybubbleChart (sample,name){
   };
   Plotly.newPlot('bubble', displaybubbleChart, bubbleLayout);
 }
-  
+
+// func for Guage display
+function showGauge(metadata, name) {
+
+  //lookup the data by experiment name 
+  var sampleMeta = metadata.filter(m => m.id === parseInt(name));
+
+  var traceDisplay3 = [
+    {
+      // setup gauge type
+      type: "indicator",
+      mode: "gauge+number+delta",
+      // setup the value of indicator
+      value: sampleMeta[0].wfreq,
+      // setup the display title
+      title: {
+        text: "Belly Button Wash Frequency (Scrubs Per Week)",
+        font: { size: 14, color: 'black' }
+      },
+      delta: { reference: 0, increasing: { color: "RebeccaPurple" } },
+      gauge: {
+        axis: { range: [null, 9], tickwidth: 1, tickcolor: "darkblue" },
+        bar: { color: "darkblue" },
+        bgcolor: "white",
+        borderwidth: 2,
+        bordercolor: "gray",
+        //setup gauge color
+        steps: [
+          { range: [0, 1], color: "#009a60" },
+          { range: [1, 2], color: '#4aa84e' },
+          { range: [2, 3], color: '#92b73a' },
+          { range: [3, 4], color: '#c6bf22' },
+          { range: [4, 5], color: '#edbd02' },
+          { range: [5, 6], color: '#ffad00' },
+          { range: [6, 7], color: '#ff8c00' },
+          { range: [7, 8], color: '#fc6114' },
+          { range: [8, 9], color: '#f43021' }
+
+        ],
+        threshold: {
+          line: { color: "red", width: 4 },
+          thickness: 0.75,
+          value: 490
+        }
+      }
+    }
+  ];
+  // gauge chart layout 
+  var disPlayLayout3 = {
+    // width: 400,
+    // height: 400,
+    autosize: true,
+    margin: { t: 0, r: 25, l: 25, b: 25, pad: 0 },
+
+    paper_bgcolor: "white",
+    font: { color: "darkblue", family: "Arial" }
+  };
+  // gauge chart layout
+  Plotly.newPlot('gauge', traceDisplay3, disPlayLayout3);
+}
