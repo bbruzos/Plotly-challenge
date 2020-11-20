@@ -42,4 +42,24 @@ function displaybarChart (sample, name) {
 
   Plotly.newPlot("bar", trace1, {displayModeBar: false});
 }
+
+// Func to display bubble chart
+
+function displaybubbleChart (sample,name){
+  
+  var trace2 = [{
+    x: sampleValue.otu_ids,
+    y: sampleValues.sample_values,
+    text: sampleValues.otu_labels,
+
+    mode: 'markers',
+    marker: {
+      // Size of marker based on value of experiment
+      size: sampleValue.sample_values,
+      color: sampleValue.otu_ids,
+      colorscale: 'Earth'
+
+    }
+  }];
+}
   
