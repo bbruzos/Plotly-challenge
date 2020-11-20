@@ -137,4 +137,13 @@ function showGauge(metadata, name) {
 function infoOTU(metadata, name) {
 
   var metadataSpace = d3.select("#sample-metadata")
+
+  // Empty html value
+  metadataSpace.html("");
+
+  // Add each key:value pair to info box
+  Object.entries(sampleMeta[0]).forEach(([key, value]) => {
+    var row = metadataSpace.append("p");
+    row.text(`${key}:${value}`);
+  })
 }
