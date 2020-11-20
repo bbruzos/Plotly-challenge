@@ -40,6 +40,18 @@ function displaybarChart (sample, name) {
 
   }];
 
+  // Layout of bar
+  var barLayout = {
+    autosize: true,
+    margin: {
+      l: 100,
+      r: 10,
+      b: 20,
+      t:30,
+      pad:0
+    },
+    showlegend: false
+  };
   Plotly.newPlot("bar", trace1, {displayModeBar: false});
 }
 
@@ -47,10 +59,12 @@ function displaybarChart (sample, name) {
 
 function displaybubbleChart (sample,name){
   
+  var sampleValue = sample.filter(item => item.id === name)[0];
+
   var trace2 = [{
     x: sampleValue.otu_ids,
-    y: sampleValues.sample_values,
-    text: sampleValues.otu_labels,
+    y: sampleValue.sample_values,
+    text: sampleValue.otu_labels,
 
     mode: 'markers',
     marker: {
@@ -89,8 +103,8 @@ function gaugeDisplay(metadata, name) {
       value: sampleMeta[0].wfreq,
       // Display title for gauge
       title: {
-        text: "Belly Button Wash Frequency (Scrub",
-        font: { size: 18, color: 'black',  }
+        text: "Belly Button Wash Frequency (Scrub Per Week)",
+        font: { size: 14, color: 'black',  }
       },
       delta: { reference: 0, increasing: { color: "RebeccaPurple" } },
       gauge: {
@@ -122,7 +136,7 @@ function gaugeDisplay(metadata, name) {
   ];
   // Gauge chart layout 
   var gaugeLayout = {
-    
+
     autosize: true,
     margin: { t: 0, r: 25, l: 25, b: 25, pad: 0 },
     paper_bgcolor: "white",
@@ -136,6 +150,7 @@ function gaugeDisplay(metadata, name) {
 
 function infoOTU(metadata, name) {
 
+  var sampleMeta = metadata.filter(item => item.id === parseInt(name));
   var metadataSpace = d3.select("#sample-metadata")
 
   // Empty html value
@@ -157,8 +172,8 @@ d3.json("data/samples.json").then((jsondata) => {
     .text(text => text)
 
     // Retrieve labels, samples, and metadata from json file
-    var labels = jsondata.names;
-    var samples = jsondata.samples;
+    var names = jsondata.names;
+    var sample = jsondata.samples;
     var metadata = jsondata.metadata;
 
     // Display bar chart, data info, gauge chart, and bubble for first value
@@ -172,10 +187,10 @@ d3.json("data/samples.json").then((jsondata) => {
     function dropdownList (){
       d3.event.preventDefault();
       var userInput = d3.select("select");
-      var userSample = userInput.property("value");
+      var userSample = userInput.property("value").replace();
 
       displaybarChart(sample, userSample)
-      intoOTU(metadata, userSample)
+      infoOTU(metadata, userSample)
       gaugeDisplay(metadata, userSample)
       displaybubbleChart(sample,userSample)
 
