@@ -16,5 +16,13 @@ function Top10OTU(sample, name) {
     }
     dataJSON.push(dictJSON)
   }
+  var sortedValues = dataJSON.sort((a,b) => b.sampleValues - a.sampleValues);
+
+  // top ten of the sample values
+  var topTenData = sortedValues.slice(0,10);
+
+  return topTenData;
 }
+
+
   
