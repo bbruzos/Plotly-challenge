@@ -131,3 +131,10 @@ function showGauge(metadata, name) {
   // gauge chart layout
   Plotly.newPlot('gauge', trace3, gaugeLayout);
 }
+
+// Func for displaying OTU info
+
+function infoOTU(metadata, name) {
+
+  var metadataSpace = d3.select("#sample-metadata")
+}
